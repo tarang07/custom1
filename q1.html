@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		Custom Directive Assignments Q1
+	</title>
+	<script type="text/javascript" src=https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script type="text/javascript">
+		var mod=angular.module("ModuleDirective",[]);
+		mod.directive("ngCopy",function(){ // Custom directive for copy input
+			return {
+				template:"<p> Entered Text Is: <b>{{txt}}</b></p>",
+				restrict:'EA'
+			}
+		});
+	</script>
+</head>
+<body ng-app="ModuleDirective">
+	<br>
+	<form>
+	<div>
+		<p>Enter Your Text : </p>
+		<div>
+			<input type="text" placeholder="Enter text here" ng-model="txt">
+		</div>
+	</div>
+	</form>
+	<br><br>
+	<div ng-Copy>
+	</div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Assignment2 AngularJs Route</title>
+  	<script type="text/javascript" src=https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js></script>
+	<script src="https://code.angularjs.org/1.5.7/angular-route.js"></script>
+
+	<script type="text/javascript">
+		var mod=angular.module("ModuleDirective",[]);
+		mod.directive("ngDirelement",function(){ //Custom Directive for Element
+			return {
+				template:"<button ng-click='popup()'>Element</button>",
+				restrict:'E'
+			}
+		});
+		mod.directive("ngDirclass",function(){ //Custom Directive for Class
+			return {
+				template:"<button ng-click='popup()'>Class</button>",
+				restrict:'C'
+			}
+		});
+		mod.directive("ngDirattribute",function(){ //Custom Directive for Attribute
+			return {
+				template:"<button ng-click='popup()'>Attribute</button>",
+				restrict:'A',
+			}
+		});
+		mod.directive("ngComment",function(){   //Custom Directive for Comment
+			return { 
+				template : '<button ng-click="popup()">Comment</button>',
+				restrict : 'M',
+				replace : 'false'
+			}
+		});
+		mod.controller("control",function($scope){ 
+			$scope.popup = function(){
+				alert('Naruto');
+			}
+		})
+	</script>
+</head>
+<body ng-app="ModuleDirective" class="container" ng-controller="control">
+	<ng-direlement></ng-direlement><br><br>
+	<div class="ng-dirclass"></div><br>
+	<div ng-dirattribute></div><br>
+	<!-- directive: ngComment -->	
+	</div>
+</body>
+</html>
