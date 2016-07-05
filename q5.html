@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        Custom Directive Assignment Two Way Data Binding
+    </title>
+    <script type="text/javascript" src=https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js></script>
+    <script type="text/javascript">
+    var app = angular.module('mainApp', []);
+    app.controller("MainCtrl", function($scope){
+        $scope.ctrlRole = "Development"
+    });
+    app.directive("myEmployee", function() {
+ 
+        return {
+            scope:
+            {
+                role:"=" // for 2 way data binding
+            },
+            template: 'From Directive : <input type="text" ng-model="role">'
+        };
+    });
+    </script>
+</head>
+
+<body>
+    <div ng-app="mainApp">
+        <div ng-controller="MainCtrl">
+        <p>Two way data binding</p><br>
+            <div> From Controller : <input type="text" ng-model="ctrlRole"></div><br>
+                <div my-employee role="ctrlRole"></div>
+        </div>
+    </div>
+</body>
+</html>

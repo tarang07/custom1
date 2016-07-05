@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		Custom Directive Assignment Isolated Scope
+	</title>
+    <script type="text/javascript" src=https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js></script>
+    <script type="text/javascript">
+    	var app = angular.module('mainApp', []);
+ 
+	app.directive("myEmployee", function() {
+	 
+	  return {
+	      restrict: 'E',
+	      scope:{}, //Isolated from the scope
+	      template: '<br><br> <input type="text" ng-model="someText"><br>{{someText}}'
+	  };
+	 
+	});
+    </script>
+</head>
+<body>
+<div ng-app="mainApp">
+			<p>Isolated Scope Example Changes in one field doesn't reflect in the other</p>
+           <my-employee></my-employee>
+           <my-employee></my-employee>
+           <my-employee></my-employee>
+     </div>
+</div>
+
+</body>
+</html>

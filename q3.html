@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Assignment2 AngularJs Route</title>
+  	<script type="text/javascript" src=https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js></script>
+	<script src="https://code.angularjs.org/1.5.7/angular-route.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<script type="text/javascript">
+		var mod = angular.module("MyApp",[]);
+		mod.factory("fac",function(){ 						//facory function
+				var size=0;
+				var employee=[{									//Employee Object
+					employee_id:"",
+					name:"",
+					salary:"",
+					age:""
+			}];
+			employee.add_update=function(p_employee){		//Adding employee in a record
+				if(p_employee.employee_id==null)
+				{
+					employee.employee_id=size++;
+					employee.push(p_employee);
+				}
+				else
+				{
+					for(i in employee)
+					{
+						if(employee[i].employee_id==p_employee.employee_id)
+						{
+							employee[i]=p_employee;
+						}
+					}
+				}
+			}		
+			employee.view=function(){						
+				return employee;
+			}
+			return employee;
+		});
+		mod.controller("employee_controller",function($scope,fac)
+		{
+			$scope.employees=fac.view();
+			$scope.add_employee=function()
+			{
+				fac.add_update($scope.new);
+				$scope.new={};
+			}
+		});
+	</script>
+</head>
+<body ng-app="MyApp" ng-controller="employee_controller" class="container">
+<form role="form">
+	<div class="form-group">
+		<label for="Name" class="control-label col-sm-2">Name</label>
+		<div class="col-sm-10">
+			<input type="text" id="Name" name="Name" placeholder="Employee Name" required ng-model="new.name" class="form-control">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="Age" class="control-label col-sm-2">Age</label>
+		<div class="col-sm-10">
+			<input type="number" id="Age" name="Age" placeholder="Employee Age" required ng-model="new.age" class="form-control">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="Salary" class="control-label col-sm-2">Salary</label>
+		<div class="col-sm-10">
+			<input type="number" id="Salary" name="Salary" placeholder="Employee Salary" required ng-model="new.salary" class="form-control">
+		</div>
+	</div>
+	<div class="form-group">
+		<input type="button" value="Save" ng-click="add_employee()" class="btn btn-primary form-control" />
+	</div>
+	<div>
+		<table class="table table-striped table-bordered">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Age</th>
+						<th>Salary</th>					
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="item in employees">
+						<td>{{item.name}}</td>
+						<td>{{item.age}}</td>
+						<td>{{item.salary}}</td>
+					</tr>
+				</tbody>
+			</table>
+	</div>
+</form>
+</body>
+</html>
